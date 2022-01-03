@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'
 import {
     Flex,
     Text,
@@ -6,26 +6,31 @@ import {
     Textarea,
     UnorderedList,
     ListItem,
-} from '@chakra-ui/react';
-import MessageBox from '../components/MessageBox';
+} from '@chakra-ui/react'
+import axios from 'axios'
+import MessageBox from '../components/MessageBox'
 
 const CreateMessage = () => {
-    const [createMessage, setCreateMessage] = useState(false);
-    const messages = [
-        {
-            id: 1,
-            name: 'kamron',
-            message: 'I am so grateful to be apart of this process.',
-            time: '1/4/22',
-        },
-        {
-            id: 2,
-            name: 'David Jones',
-            message:
-                'I am so grateful to be apart of this process. This is a very long message with real text to kind of simulate what would happen if someone said all of this in a textarea. So yeah, take this as is.',
-            time: '1/4/22',
-        },
-    ];
+    const [createMessage, setCreateMessage] = useState(false)
+    const [messages, setMessages] = useState([])
+
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const { data } = await axios.get(
+                    'http://localhost:4000/messages'
+                )
+                console.log(typeof data.messageList[0].date)
+                return data.messageList
+            } catch (error) {
+                console.log('There was an error!!')
+                console.log(error)
+            }
+        }
+        getData().then((data) => {
+            setMessages(data)
+        })
+    }, [])
 
     return (
         <Flex {...styles.container} height={'100vh'}>
@@ -76,21 +81,26 @@ const CreateMessage = () => {
                 >
                     Messages
                 </Text>
-                <UnorderedList display={'flex'} flexDirection={'column'}>
+                <UnorderedList
+                    display={'flex'}
+                    flexDirection={'column'}
+                    width={'100%'}
+                >
                     {messages.map((data) => (
-                        <ListItem listStyleType={'none'} key={data.id} my={3}>
+                        <ListItem listStyleType={'none'} key={data._id} my={3}>
                             <MessageBox
                                 message={data.message}
                                 name={data.name}
-                                date={data.time}
+                                date={data.date.split('T')[0]}
+                                {...console.log(data.date.split('T')[1])}
                             />
                         </ListItem>
                     ))}
                 </UnorderedList>
             </Flex>
         </Flex>
-    );
-};
+    )
+}
 
 const styles = {
     container: {
@@ -101,6 +111,6 @@ const styles = {
     text: {
         fontSize: '2xl',
     },
-};
+}
 
-export default CreateMessage;
+export default CreateMessage
