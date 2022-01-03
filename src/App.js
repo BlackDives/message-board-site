@@ -10,6 +10,7 @@ const App = () => {
             backgroundColor={'bgDark'}
             color={'textDark'}
             flexDirection={'column'}
+            width={'100%'}
         >
             {/*Header*/}
             <Header />

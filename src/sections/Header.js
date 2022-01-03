@@ -3,8 +3,12 @@ import { Flex, Text } from '@chakra-ui/react';
 
 const Header = () => {
     return (
-        <Flex {...styles.containerStyle}>
-            <Text fontSize={'2xl'}>Kam's Message Board</Text>
+        <Flex
+            {...styles.containerStyle}
+            flexDirection={'row'}
+            justifyContent={'center'}
+        >
+            <Text fontSize={'4xl'}>Kam's Message Board</Text>
         </Flex>
     );
 };
