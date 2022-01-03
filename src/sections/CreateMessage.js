@@ -35,31 +35,38 @@ const CreateMessage = () => {
                 </Button>
             )}
             {createMessage && (
-                <Flex
-                    flexDirection={'column'}
-                    alignItems={'center'}
-                    justifyContent={'center'}
-                    width={'100%'}
-                    height={'50%'}
-                >
-                    <Textarea size={'lg'} width={'70%'} height={'50%'} />
-                    <Button my={3} width={'10%'}>
-                        Submit
-                    </Button>
-                    <Button
-                        onClick={() => setCreateMessage(false)}
-                        color={'accentDark'}
-                        width={'10%'}
+                <form style={{ width: '100%', height: '45%' }}>
+                    <Flex
+                        flexDirection={'column'}
+                        alignItems={'center'}
+                        justifyContent={'center'}
+                        width={'100%'}
+                        height={'100%'}
                     >
-                        Cancel
-                    </Button>
-                </Flex>
+                        <Textarea
+                            size={'lg'}
+                            width={'70%'}
+                            height={'50%'}
+                            borderColor={'textDark'}
+                        />
+                        <Button my={3} width={'10%'}>
+                            Submit
+                        </Button>
+                        <Button
+                            onClick={() => setCreateMessage(false)}
+                            color={'accentDark'}
+                            width={'10%'}
+                        >
+                            Cancel
+                        </Button>
+                    </Flex>
+                </form>
             )}
             {/** Messages */}
             <Flex
                 flexDirection={'column'}
                 width={'70%'}
-                paddingY={10}
+                paddingY={createMessage ? 0 : 10}
                 alignItems={'center'}
             >
                 <Text
