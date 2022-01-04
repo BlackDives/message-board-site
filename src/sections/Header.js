@@ -8,7 +8,7 @@ const Header = () => {
             flexDirection={'row'}
             justifyContent={'center'}
         >
-            <Text fontSize={['2xl', '5xl', '4xl']}>Kam's Message Board</Text>
+            <Text fontSize={['3xl', '5xl', '4xl']}>Message Board</Text>
         </Flex>
     )
 }
@@ -16,7 +16,7 @@ const Header = () => {
 const styles = {
     containerStyle: {
         width: '100%',
-        padding: 10,
+        padding: [10],
     },
 }
 

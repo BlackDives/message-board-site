@@ -61,7 +61,10 @@ const CreateMessage = () => {
     return (
         <Flex {...styles.container} p={10} minH={'100vh'}>
             {!createMessage && (
-                <Button onClick={() => setCreateMessage(true)}>
+                <Button
+                    onClick={() => setCreateMessage(true)}
+                    width={['100%', '10%']}
+                >
                     Create Message
                 </Button>
             )}
@@ -81,7 +84,7 @@ const CreateMessage = () => {
                             placeholder={'name....'}
                             _placeholder={{ color: 'accentDark', opacity: 0.5 }}
                             size={'lg'}
-                            width={'70%'}
+                            width={['100%', '70%']}
                             borderColor={'textDark'}
                             my={5}
                             value={name}
@@ -94,21 +97,20 @@ const CreateMessage = () => {
                             placeholder={'Type your message....'}
                             _placeholder={{ color: 'accentDark', opacity: 0.5 }}
                             size={'lg'}
-                            width={'70%'}
+                            width={['100%', '70%']}
                             height={'150px'}
                             borderColor={'textDark'}
                             value={message}
                             onChange={(e) => setMessage(e.target.value)}
                             required={true}
                         />
-                        <Button my={3} width={'10%'} type={'submit'}>
+                        <Button my={3} width={['100%', '10%']} type={'submit'}>
                             Submit
                         </Button>
                         <Button
                             onClick={() => setCreateMessage(false)}
                             color={'accentDark'}
-                            width={'10%'}
-                            {...console.log(message)}
+                            width={['100%', '10%']}
                         >
                             Cancel
                         </Button>
@@ -118,7 +120,7 @@ const CreateMessage = () => {
 
             <Flex
                 flexDirection={'column'}
-                width={'70%'}
+                width={['100%', '70%']}
                 paddingY={createMessage ? 0 : 10}
                 alignItems={'center'}
             >
@@ -126,6 +128,7 @@ const CreateMessage = () => {
                     fontSize={'3xl'}
                     backgroundImage="linear-gradient(90deg, #fc6045 0%, #fd1d1d 10%, #9518fc 100%)"
                     backgroundClip="text"
+                    pt={10}
                 >
                     Messages
                 </Text>

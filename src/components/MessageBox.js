@@ -1,5 +1,5 @@
-import React from 'react';
-import { Flex, Text } from '@chakra-ui/react';
+import React from 'react'
+import { Flex, Text } from '@chakra-ui/react'
 
 const MessageBox = ({ message, name, date }) => {
     return (
@@ -14,7 +14,7 @@ const MessageBox = ({ message, name, date }) => {
             <Text my={1}>{`- ${name}`}</Text>
             <Text>{date}</Text>
         </Flex>
-    );
-};
+    )
+}
 
-export default MessageBox;
+export default MessageBox
