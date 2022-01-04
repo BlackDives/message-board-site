@@ -115,7 +115,7 @@ const CreateMessage = () => {
                     </Flex>
                 </form>
             )}
-            {/** Messages */}
+
             <Flex
                 flexDirection={'column'}
                 width={'70%'}
