@@ -6,7 +6,7 @@ Welcome to my message board website. It is a basic website that allows you to wr
 
 1. First you either want to `npm install` or `yarn install` (whichever one you use).
 
-2. This website also uses a RESTful API that I built that you can download from this repo [https://github.com/BlackDives/message-board-API].
+2. This website also uses a RESTful API that I built that you can download from this repo [https://github.com/BlackDives/message-board-API](https://github.com/BlackDives/message-board-API).
 
 3. Once you have the API running locally you can run the command `npm start` (or `yarn start`) to run the website.
 
