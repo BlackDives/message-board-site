@@ -6,13 +6,17 @@ import {
     Textarea,
     UnorderedList,
     ListItem,
+    Input,
 } from '@chakra-ui/react'
 import axios from 'axios'
 import MessageBox from '../components/MessageBox'
 
 const CreateMessage = () => {
     const [createMessage, setCreateMessage] = useState(false)
+    const [message, setMessage] = useState('')
+    const [name, setName] = useState('')
     const [messages, setMessages] = useState([])
+    const [submitted, setSubmitted] = useState(false)
 
     useEffect(() => {
         const getData = async () => {
@@ -20,7 +24,6 @@ const CreateMessage = () => {
                 const { data } = await axios.get(
                     'http://localhost:4000/messages'
                 )
-                console.log(typeof data.messageList[0].date)
                 return data.messageList
             } catch (error) {
                 console.log('There was an error!!')
@@ -30,17 +33,43 @@ const CreateMessage = () => {
         getData().then((data) => {
             setMessages(data)
         })
-    }, [])
+        setSubmitted(false)
+    }, [submitted])
+
+    const postMessage = async (e) => {
+        e.preventDefault()
+        const config = {
+            header: {
+                'Content-Type': 'application/json',
+            },
+        }
+
+        try {
+            const { data } = await axios.post(
+                'http://localhost:4000/messages',
+                { message, name },
+                config
+            )
+            setSubmitted(true)
+            setMessage('')
+            setName('')
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
-        <Flex {...styles.container} height={'100vh'}>
+        <Flex {...styles.container} p={10} minH={'100vh'}>
             {!createMessage && (
                 <Button onClick={() => setCreateMessage(true)}>
                     Create Message
                 </Button>
             )}
             {createMessage && (
-                <form style={{ width: '100%', height: '45%' }}>
+                <form
+                    style={{ width: '100%', height: '100%' }}
+                    onSubmit={postMessage}
+                >
                     <Flex
                         flexDirection={'column'}
                         alignItems={'center'}
@@ -48,19 +77,38 @@ const CreateMessage = () => {
                         width={'100%'}
                         height={'100%'}
                     >
-                        <Textarea
+                        <Input
+                            placeholder={'name....'}
+                            _placeholder={{ color: 'accentDark', opacity: 0.5 }}
                             size={'lg'}
                             width={'70%'}
-                            height={'50%'}
                             borderColor={'textDark'}
+                            my={5}
+                            value={name}
+                            onChange={(e) => {
+                                setName(e.target.value)
+                            }}
+                            required={true}
                         />
-                        <Button my={3} width={'10%'}>
+                        <Textarea
+                            placeholder={'Type your message....'}
+                            _placeholder={{ color: 'accentDark', opacity: 0.5 }}
+                            size={'lg'}
+                            width={'70%'}
+                            height={'150px'}
+                            borderColor={'textDark'}
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
+                            required={true}
+                        />
+                        <Button my={3} width={'10%'} type={'submit'}>
                             Submit
                         </Button>
                         <Button
                             onClick={() => setCreateMessage(false)}
                             color={'accentDark'}
                             width={'10%'}
+                            {...console.log(message)}
                         >
                             Cancel
                         </Button>
@@ -92,7 +140,6 @@ const CreateMessage = () => {
                                 message={data.message}
                                 name={data.name}
                                 date={data.date.split('T')[0]}
-                                {...console.log(data.date.split('T')[1])}
                             />
                         </ListItem>
                     ))}
