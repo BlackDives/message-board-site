@@ -134,15 +134,21 @@ const CreateMessage = () => {
                     flexDirection={'column'}
                     width={'100%'}
                 >
-                    {messages.map((data) => (
-                        <ListItem listStyleType={'none'} key={data._id} my={3}>
-                            <MessageBox
-                                message={data.message}
-                                name={data.name}
-                                date={data.date.split('T')[0]}
-                            />
-                        </ListItem>
-                    ))}
+                    {messages
+                        .map((data) => (
+                            <ListItem
+                                listStyleType={'none'}
+                                key={data._id}
+                                my={3}
+                            >
+                                <MessageBox
+                                    message={data.message}
+                                    name={data.name}
+                                    date={data.date.split('T')[0]}
+                                />
+                            </ListItem>
+                        ))
+                        .reverse()}
                 </UnorderedList>
             </Flex>
         </Flex>
